@@ -1,9 +1,13 @@
+import os
 import random
 
+import dotenv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
+
+dotenv.load_dotenv()
 
 driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.maximize_window()
@@ -28,11 +32,11 @@ for i in inputs:
             with open("usernames.txt", "a") as my_file:
                 my_file.write(f"{username}\n")
         case "Senha":
-            i.send_keys("alexson1203")
+            i.send_keys(os.getenv("PASSWORD"))
         case "Confirme a senha":
-            i.send_keys("alexson1203")
+            i.send_keys(os.getenv("PASSWORD"))
         case "Nome completo":
-            i.send_keys("Alexson Pereira")
+            i.send_keys(os.getenv("NAME"))
 
 button_register = driver.find_element(By.CLASS_NAME, "ant-btn-block")
 button_register.click()
@@ -78,7 +82,7 @@ driver.find_element(
 driver.find_element(
     By.XPATH,
     "/html/body/div[7]/div/div[2]/div/div[2]/div[2]/div/div[1]/div/div/div[1]/div[1]/div/span/input",
-).send_keys("09555")
+).send_keys(os.getenv("CODE"))
 
 
 driver.find_element(
